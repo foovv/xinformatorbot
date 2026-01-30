@@ -2,6 +2,7 @@ const { Telegraf } = require('telegraf')
 require('dotenv').config()
 
 const { mainMenuKeyboard } = require('./keyboards/mainMenu')
+const { languageMenu } = require('./keyboards/languageMenu')
 const { profile } = require('./commands/profile')
 
 const bot = new Telegraf(process.env.BOT_TOKEN)
@@ -18,6 +19,10 @@ bot.command('menu', ctx => {
 })
 
 bot.action('profile', profile)
+bot.action('language', ctx => {
+	ctx.answerCbQuery()
+	ctx.reply('Dostępne języki:', languageMenu())
+})
 
 bot.launch()
 
